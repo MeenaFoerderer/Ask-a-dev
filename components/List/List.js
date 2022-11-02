@@ -2,7 +2,7 @@ import useSWR from 'swr'
 import { fetcher } from '../../helpers/api'
 import { useState } from 'react'
 import styled from 'styled-components'
-//import Link from 'next/link'
+import Link from 'next/link'
 
 export default function List() {
   const { data, error } = useSWR('/api/questions', fetcher)
@@ -21,7 +21,9 @@ export default function List() {
           <StyledLi key={listItem.id}>
             <div>
               <span>{listItem.closed ? '✅' : '💬'}</span>
-              <h3>{listItem.question}</h3>
+              <StyledLink href={`/${listItem.id}/`}>
+                <h3>{listItem.question}</h3>
+              </StyledLink>
             </div>
 
             <div>
@@ -40,6 +42,7 @@ const StyledUl = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 2em;
+  padding: 0 2em;
 `
 const StyledLi = styled.li`
   display: flex;
@@ -47,4 +50,12 @@ const StyledLi = styled.li`
   padding: 0.5em 1em;
   background-color: lightgrey;
   border-radius: 20px;
+`
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: black;
+
+  :hover {
+    color: blue;
+  }
 `
