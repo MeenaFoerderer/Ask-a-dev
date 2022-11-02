@@ -21,7 +21,7 @@ export default function Thread() {
 
   function onAdd(questionInput) {
     console.log(questionInput)
-    sendAnswer(thread, questionInput, 'Lara')
+    sendAnswer(thread, questionInput)
     mutate()
   }
 
