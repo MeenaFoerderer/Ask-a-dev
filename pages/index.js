@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import List from '../components/List/List'
 
 function LandingPage() {
   return (
@@ -14,6 +15,7 @@ function LandingPage() {
         </p>
         <aside className="ninja">{"Like a freakin' ninja!"}</aside>
       </section>
+      <List />
     </>
   )
 }
