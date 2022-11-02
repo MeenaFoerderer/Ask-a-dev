@@ -3,18 +3,26 @@ import useSWR from 'swr'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import styled from 'styled-components'
+import AddQuestionOrAnswer from '../../components/AddQuestionOrAnswer'
+import { sendAnswer } from '../../helpers/api'
 
 export default function Thread() {
   const router = useRouter()
   const { thread } = router.query
 
-  const { data, error } = useSWR(`/api/questions/${thread}`, fetcher)
-  console.log(data)
+  const { data, error, mutate } = useSWR(`/api/questions/${thread}`, fetcher)
+  // console.log(data)
   if (error) {
     return <div>failed to load</div>
   }
   if (!data) {
     return <div>loading...</div>
+  }
+
+  function onAdd(questionInput) {
+    console.log(questionInput)
+    sendAnswer(thread, questionInput, 'Lara')
+    mutate()
   }
 
   return (
@@ -32,6 +40,7 @@ export default function Thread() {
           )
         })}
       </StyledUl>
+      <AddQuestionOrAnswer onAdd={onAdd} />
     </StyledSection>
   )
 }
