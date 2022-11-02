@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import { GlobalStyle } from '../components/GlobalStyles'
 
 function MyApp({ Component, pageProps }) {
   const { asPath, isReady } = useRouter()
@@ -13,6 +14,7 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
+      <GlobalStyle />
       <Component {...pageProps} />
     </>
   )
